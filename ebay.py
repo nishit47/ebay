@@ -60,5 +60,20 @@ for list in lists:
         shippingLocation=list.find('span', class_="s-item__location").text[5:]
     except:
         shippingLocation="Unspecified"
-    data=[productName, condition, rating, reviewCount, price, shippingPrice, shippingLocation]
+    try:
+        bidCountString=list.find('span', class_="s-item__bids s-item__bidCount").text
+        bidCount=""
+        for character in bidCountString:
+            if character.isdigit():
+                bidCount=bidCount+character
+        bidCount=int(bidCount)
+        bid="yes"
+    except:
+        bidCount=0
+        bid="No"
+    try:
+        bidTimeLeft=list.find('span', class_="s-item__time-left").text
+    except:
+        bidTimeLeft="N/A"
+    data=[productName, condition, rating, reviewCount, price, shippingPrice, shippingLocation, bid, bidCount, bidTimeLeft]
     print(data)
