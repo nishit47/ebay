@@ -103,6 +103,9 @@ with open(dataNameOutput, 'w', encoding='utf8', newline='') as f:
             url=url[:-1]+str(pageNumber)
 
 df=pd.read_csv(dataNameOutput)
+duplicatesRemoved=df.drop_duplicates()
+duplicatesRemoved.to_csv(dataNameOutput)
 
+df=pd.read_csv(dataNameOutput)
 profile=ProfileReport(df)
 profile.to_file(output_file=outputNameHtml)
